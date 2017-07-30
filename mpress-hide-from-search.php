@@ -82,7 +82,7 @@ if ( ! class_exists( 'mPress_Hide_From_Search' ) ) {
 		 * @internal
 		 */
 		public static function _render_meta_box_content() {
-			$hidden = (boolean) get_post_meta( get_the_ID(), self::$meta_key, true );
+			$hidden        = (boolean) get_post_meta( get_the_ID(), self::$meta_key, true );
 			$post_type_obj = get_post_type_object( get_post_type() );
 			wp_nonce_field( __FILE__, self::$nonce_name );
 			echo '<input type="checkbox" name="' . self::$meta_key . '" value="1"' . checked( $hidden, true, false ) . ' /> ';
@@ -130,7 +130,7 @@ if ( ! class_exists( 'mPress_Hide_From_Search' ) ) {
 			global $wpdb;
 
 			if ( is_search() ) {
-				$sql = "AND ID NOT IN ( SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = %s AND meta_value = %d )";
+				$sql   = "AND ID NOT IN ( SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = %s AND meta_value = %d )";
 				$where .= $wpdb->prepare( $sql, self::$meta_key, 1 );
 			}
 
